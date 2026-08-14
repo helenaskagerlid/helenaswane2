@@ -1,0 +1,20 @@
+{
+  "name": "helenaswane",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "cms": "decap-server"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.0.4",
+    "decap-cms-app": "^3.8.4",
+    "locomotive-scroll": "^5.0.1",
+    "normalize.css": "^8.0.1",
+    "remove-markdown": "^0.6.2"
+  }
+}

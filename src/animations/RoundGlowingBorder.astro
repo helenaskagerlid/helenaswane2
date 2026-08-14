@@ -1,0 +1,75 @@
+<div class="round-glowing-border">
+  <slot />
+</div>
+
+<style>
+  @property --glow-deg {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: -90deg;
+  }
+
+  .round-glowing-border {
+    --gradient-glow: rgb(229, 145, 180), rgb(241, 173, 200), rgb(252, 194, 217),
+      rgb(245, 140, 180), rgb(238, 160, 190), rgb(252, 200, 220),
+      rgb(229, 145, 180);
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    padding: 2rem;
+    position: relative;
+    isolation: isolate;
+
+    background:
+      linear-gradient(#faf6f1 0 0) padding-box,
+      conic-gradient(from var(--glow-deg), var(--gradient-glow)) border-box;
+
+    border: 4px solid transparent;
+    transition: all 0.8s ease-in-out;
+    animation: glow 10s infinite linear;
+  }
+
+  .round-glowing-border::before,
+  .round-glowing-border::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  /* inre bakgrund så bilden ligger “ovanpå” glow */
+  .round-glowing-border::before {
+    background: #faf6f1;
+    inset: 0; /* fyller hela elementet */
+    z-index: -1;
+    filter: blur(var(--glow-size, 1rem));
+  }
+
+  /* själva glow-effekten */
+  .round-glowing-border::after {
+    background: conic-gradient(from var(--glow-deg), var(--gradient-glow));
+    inset: -1.5rem; /* utanför för glow */
+    z-index: -2;
+    filter: blur(var(--glow-size, 1rem));
+    opacity: var(--glow-intensity, 0.5);
+  }
+
+  @keyframes glow {
+    100% {
+      --glow-deg: 270deg;
+    }
+  }
+
+  /* se till att slotted elementet blir perfekt rund */
+  .round-glowing-border > * {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+</style>

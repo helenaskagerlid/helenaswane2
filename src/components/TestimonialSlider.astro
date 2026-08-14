@@ -1,0 +1,184 @@
+---
+import { getEntry } from "astro:content";
+
+const testimonial1 = await getEntry("testimonials", "testimonial1");
+const testimonial2 = await getEntry("testimonials", "testimonial2");
+const testimonial3 = await getEntry("testimonials", "testimonial3");
+---
+
+<section class="testimonial-section" id="testimonials">
+  <div class="slider-wrapper">
+    <div class="slider">
+      <div class="slide">
+        Wow, vilken härlig session. Helena har en fantastisk förmåga att guida
+        på ett så kärleksfullt, varmt och tryggt sätt. Vi jobbade med ett
+        mönster jag kämpat med under en längre tid och på ett lekfullt och
+        roligt sätt har Helena hjälpt mig att skifta det. Oro har bytts ut mot
+        lugn, pepp och glädje. Alla som vill bli coachade med ledord som
+        trygghet, lekfullhet och kärlek borde testa en session med Helena! Tusen
+        tack! ❤<br />
+        <span>- Helena</span>
+      </div>
+      <div class="slide">
+        Coachingen med Helena gav resultat direkt. Mitt motstånd mot att ta tag
+        i saker har minskat markant och förändringen sitter fortfarande i en
+        månad senare. Helena är en varm och intuitiv coach som jag verkligen
+        rekommenderar.<br />
+        <span>- Johanna</span>
+      </div>
+      <div class="slide">
+        Det var fantastiskt att kunna arbeta med något så djupt och svårt utan
+        att det kändes tungt eller överväldigande. Helena är trygg, lugn och
+        professionell och jag rekommenderar henne verkligen som coach.<br />
+        <span>- Linda</span>
+      </div>
+      <div class="slide">
+        Vill verkligen rekommendera Helenas sessioner. Jag hade känslor och
+        tankar som drog ner mig rejält. Men med Helenas vägledning har jag
+        hittat ut från både känslan och de mörka tankarna. Det var nästan som
+        magi, att på en timma förändra något som dragit ner mig så länge. Och
+        det bästa av allt är att det håller i sig..<br />
+        <span>- Eva</span>
+      </div>
+      <div class="slide">
+        Jag upplevde sessionen som en varm sommarvind. Mjuk, behaglig och fylld
+        av tillit.<span>- Veronica</span>
+      </div>
+    </div>
+
+    <button aria-label="show previous testimonial" class="prev-btn">‹</button>
+    <button aria-label="show next testimonial" class="next-btn">›</button>
+
+    <div class="slider-nav">
+      <button aria-label="Gå till testimonial 1" class="nav-btn"></button>
+      <button aria-label="Gå till testimonial 2" class="nav-btn"></button>
+      <button aria-label="Gå till testimonial 3" class="nav-btn"></button>
+      <button aria-label="Gå till testimonial 4" class="nav-btn"></button>
+      <button aria-label="Gå till testimonial 5" class="nav-btn"></button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .slider-wrapper {
+    position: relative;
+    width: 650px;
+    height: 350px;
+    overflow: hidden;
+    margin: 2rem auto;
+  }
+
+  @media (max-width: 1210px) {
+    .slider-wrapper {
+      width: 590px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .slider-wrapper {
+      width: 400px;
+      height: 480px;
+      overflow-y: visible;
+    }
+  }
+
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    min-width: 100%;
+    background: #faf6f1;
+    border-radius: 15px;
+    font-style: italic;
+    padding: 40px 60px;
+  }
+
+  .slide span {
+    font-weight: 600;
+    display: block;
+    margin-top: 10px;
+  }
+
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    font-size: 4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff3b9c;
+  }
+
+  .prev-btn {
+    left: 10px;
+  }
+
+  .next-btn {
+    right: 10px;
+  }
+
+  .slider-nav {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .nav-btn {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    border: none;
+    background-color: #d82094;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+
+  .nav-btn.active {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  const slider = document.querySelector(".slider") as HTMLElement;
+  const prevBtn = document.querySelector(".prev-btn") as HTMLElement;
+  const nextBtn = document.querySelector(".next-btn") as HTMLElement;
+  const navBtns = Array.from(
+    document.querySelectorAll(".nav-btn"),
+  ) as HTMLElement[];
+
+  let index = 0;
+
+  function updateSlider() {
+    slider!.style.transform = `translateX(-${index * 100}%)`;
+    navBtns.forEach((btn, i) => btn.classList.toggle("active", i === index));
+  }
+
+  function nextSlide() {
+    index = (index + 1) % slides.length;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    index = (index - 1 + slides.length) % slides.length;
+    updateSlider();
+  }
+
+  prevBtn!.addEventListener("click", prevSlide);
+  nextBtn!.addEventListener("click", nextSlide);
+
+  navBtns.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      index = i;
+      updateSlider();
+    });
+  });
+
+  let autoplay = setInterval(nextSlide, 15000);
+
+  updateSlider();
+</script>

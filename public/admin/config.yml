@@ -1,0 +1,58 @@
+backend:
+  name: github
+  repo: helenaskagerlid/helenaswane2
+  branch: main
+  base_url: https://netlify-cms-github-oauth-provider-kuzuq16zw.vercel.app
+
+# Gör att `npm run cms` fungerar lokalt utan inloggning
+local_backend: true
+
+media_folder: "public/media"
+public_folder: "/media"
+
+locale: "sv"
+
+collections:
+  - name: "blog"
+    label: "Blogginlägg"
+    label_singular: "Blogginlägg"
+    folder: "src/content/blog-posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} – {{pubDate}}"
+    sortable_fields: ["pubDate", "title"]
+    fields:
+      - label: "Rubrik"
+        name: "title"
+        widget: "string"
+      - label: "Publiceringsdatum"
+        name: "pubDate"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+      - label: "Huvudbild"
+        name: "image"
+        widget: "image"
+        hint: "Visas överst i inlägget och i listan på bloggsidan."
+      - label: "Bildbeskrivning (alt-text)"
+        name: "imageAlt"
+        widget: "string"
+        required: false
+        hint: "Kort beskrivning av bilden för skärmläsare och SEO."
+      - label: "Ingress"
+        name: "description"
+        widget: "text"
+        required: false
+        hint: "Kort text som visas i listan på bloggsidan. Lämnas den tom används början av texten."
+      - label: "Utkast"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        hint: "Kryssa i för att spara utan att publicera på sajten."
+      - label: "Innehåll"
+        name: "body"
+        widget: "markdown"
+        hint: "Skriv texten här. Använd bildknappen i verktygsfältet för att lägga in bilder i texten."

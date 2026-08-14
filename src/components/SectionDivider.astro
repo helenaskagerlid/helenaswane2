@@ -1,0 +1,56 @@
+---
+import BgImage from "../assets/pinkBgHelena.png";
+import { Image } from "astro:assets";
+---
+
+<section class="section-divider">
+  <Image
+    class="divider-img"
+    src={BgImage}
+    alt=""
+    width="937"
+    height="521"
+    loading="lazy"
+    format="webp"
+  />
+</section>
+
+<style>
+  .section-divider {
+    margin-block: 80px;
+    position: relative;
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .divider-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    object-position: center 80%;
+  }
+
+  .section-divider::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      #faf6f1 0%,
+      rgba(250, 246, 241, 0) 35%
+    );
+    z-index: 2;
+  }
+
+  .section-divider::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #faf6f1 0%, rgba(250, 246, 241, 0) 30%);
+    z-index: 3;
+  }
+</style>

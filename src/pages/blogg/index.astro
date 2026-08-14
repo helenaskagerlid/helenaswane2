@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
+
+const posts = (await getCollection("blogPosts", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Blogg - Helena Swane by heart"
+  description="Tankar, reflektioner och inspiration om transformativ coaching och personlig utveckling"
+>
+  <section class="blog-section section-inner">
+    <header class="blog-header">
+      <h1 class="blog-heading">Blogg</h1>
+      <p class="blog-subheading">
+        Tankar, reflektioner och inspiration på vägen
+      </p>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p class="blog-empty">Inga inlägg publicerade än. Håll utkik!</p>
+      ) : (
+        <div class="blog-grid">
+          {posts.map((post) => (
+            <BlogPost
+              title={post.data.title}
+              image={post.data.image}
+              imageAlt={post.data.imageAlt}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              url={`/blogg/${post.id}`}
+              bio={post.body ?? ""}
+            />
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-section {
+    width: 100%;
+    padding-block: 4rem 6rem;
+  }
+
+  .blog-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .blog-heading {
+    font-size: clamp(1.5rem, calc(0.2rem + 3vw), 2.5rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .blog-subheading {
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-empty {
+    text-align: center;
+    font-style: italic;
+  }
+</style>

@@ -1,0 +1,50 @@
+<div class="glitter"></div>
+
+<style>
+  .glitter,
+  .glitter:after,
+  .glitter:before {
+    content: "";
+    position: absolute;
+    top: -650px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(
+        4px 4px at 100px 50px,
+        #f7da7c,
+        transparent
+      ),
+      radial-gradient(4px 4px at 200px 150px, #f7da7c, transparent),
+      radial-gradient(3px 3px at 330px 280px, #f7da7c, transparent),
+      radial-gradient(4px 4px at 120px 300px, #f7da7c, transparent),
+      radial-gradient(3px 3px at 350px 500px, #f7da7c, transparent);
+    background-size: 650px 650px;
+
+    animation: glitterAnimation 50s linear;
+    animation-iteration-count: infinite;
+  }
+
+  .glitter:after {
+    margin-left: -250px;
+    opacity: 0.6;
+    /* filter: blur(2px); */
+    animation-duration: 20s;
+  }
+
+  .glitter:before {
+    margin-left: -350px;
+    opacity: 0.7;
+    /* filter: blur(1px); */
+    animation-duration: 30s;
+  }
+
+  @keyframes glitterAnimation {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(650px);
+    }
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import removeMarkdown from "remove-markdown";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blogPosts", ({ data }) => !data.draft);
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Intl.DateTimeFormat("sv-SE", {
+  dateStyle: "long",
+}).format(post.data.pubDate);
+
+const description =
+  post.data.description ??
+  removeMarkdown(post.body ?? "", { useImgAltText: false }).slice(0, 155);
+---
+
+<BaseLayout title={`${post.data.title} - Helena Swane by heart`} description={description}>
+  <article class="post section-inner">
+    <header class="post-header">
+      <time class="post-date" datetime={post.data.pubDate.toISOString()}>
+        {formattedDate}
+      </time>
+      <h1 class="post-title">{post.data.title}</h1>
+    </header>
+
+    <img
+      class="post-hero"
+      src={post.data.image}
+      alt={post.data.imageAlt ?? post.data.title}
+      loading="eager"
+    />
+
+    <div class="post-body">
+      <Content />
+    </div>
+
+    <a class="post-back" href="/blogg">← Tillbaka till bloggen</a>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    width: 100%;
+    max-width: 760px;
+    padding-block: 4rem 6rem;
+  }
+
+  .post-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .post-date {
+    font-size: 0.9rem;
+    color: #8a8484;
+  }
+
+  .post-title {
+    font-size: clamp(1.6rem, calc(0.2rem + 3vw), 2.5rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0.5rem 0 0;
+  }
+
+  .post-hero {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 2.5rem;
+  }
+
+  .post-body {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .post-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 2rem auto;
+  }
+
+  .post-body :global(h2),
+  .post-body :global(h3) {
+    font-weight: 400;
+    margin-top: 2.5rem;
+  }
+
+  .post-body :global(a) {
+    color: #d82094;
+  }
+
+  .post-body :global(blockquote) {
+    border-left: 3px solid #f492b8;
+    margin-left: 0;
+    padding-left: 1.5rem;
+    font-style: italic;
+  }
+
+  .post-back {
+    display: inline-block;
+    margin-top: 3rem;
+    color: #d82094;
+    text-decoration: none;
+  }
+
+  .post-back:hover {
+    text-decoration: underline;
+  }
+</style>

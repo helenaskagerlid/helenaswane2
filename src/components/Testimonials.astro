@@ -1,0 +1,425 @@
+---
+import TestimonialSlider from "./TestimonialSlider.astro";
+import { Image } from "astro:assets";
+---
+
+<section class="testimonial-section" id="testimonials">
+  <div class="testimonial-wrapper section-inner">
+    <h2 class="testimonial-heading">Testimonials</h2>
+    <p class="testimonial-subheading">
+      Ord från några av de klienter jag haft glädjen att arbeta med
+    </p>
+
+    <div class="testimonial-content">
+      <div class="image-wrapper">
+        <svg
+          class="svg-img"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient
+              id="blobGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stop-color="#ff3b9c">
+                <animate
+                  attributeName="stop-color"
+                  values="
+        #ff3b9c;
+        #ff5fb2;
+        #ff7fc2;
+        #f492b8;
+        #ff9fcd;
+        #ff7fc2;
+        #ff5fb2;
+        #ff3b9c
+      "
+                  dur="40s"
+                  repeatCount="indefinite"></animate>
+              </stop>
+
+              <stop offset="100%" stop-color="#ff7fc2">
+                <animate
+                  attributeName="stop-color"
+                  values="
+        #ff7fc2;
+        #ff9fcd;
+        #ffc1dd;
+        #ffd3e6;
+        #ffc1dd;
+        #ff9fcd;
+        #ff7fc2
+      "
+                  dur="40s"
+                  repeatCount="indefinite"></animate>
+              </stop>
+            </linearGradient>
+          </defs>
+
+          <path
+            fill="url(#blobGradient)"
+            d="M62.5,-46.3C76.2,-32.7,79.2,-7,73.2,15.6C67.2,38.2,52.2,57.7,32.3,67.4C12.4,77.1,-12.3,77,-29.3,66.6C-46.2,56.2,-55.4,35.5,-60.8,13.4C-66.2,-8.6,-67.8,-32,-57.1,-45C-46.3,-58,-23.1,-60.6,0.6,-61.1C24.4,-61.6,48.8,-60,62.5,-46.3Z"
+            transform="translate(100 100)"></path>
+        </svg>
+        <Image
+          class="testimonial-img"
+          src="/rainbowbutterfly.webp"
+          alt="Round and colorful image of a golden butterfly with a blurred background"
+          width={380}
+          height={390}
+          loading="eager"
+          format="webp"
+        />
+      </div>
+      <TestimonialSlider />
+    </div>
+
+    <style>
+      .glowing-border-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        @media (max-width: 700px) {
+          justify-content: center;
+        }
+      }
+
+      :global(:root) {
+        --gradient: linear-gradient(
+          135deg,
+          #ff3b9c,
+          #f492b8,
+          #ff3b9c,
+          #f492b8,
+          #ff3b9c
+        );
+      }
+
+      .gradient-background {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          135deg,
+          #ff3b9c,
+          #f492b8,
+          #ff3b9c,
+          #f492b8,
+          #ff3b9c
+        );
+        animation: bg-animation 25s infinite alternate;
+      }
+
+      @keyframes bg-animation {
+        0% {
+          background-position: left;
+        }
+        100% {
+          background-position: right;
+        }
+      }
+
+      .section-inner {
+        padding: 0;
+      }
+
+      .testimonial-section {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width: 100%;
+        background-color: #faf6f1;
+        padding-bottom: 160px;
+      }
+
+      .testimonial-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+      }
+
+      .testimonial-heading {
+        font-size: clamp(1.5rem, calc(0.2rem + 3vw), 2.5rem);
+        font-weight: 400;
+        text-transform: uppercase;
+        align-self: flex-end;
+        padding-right: 150px;
+        margin-bottom: 0;
+        margin-top: 0;
+        /* background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+      }
+
+      .testimonial-subheading {
+        font-style: italic;
+        align-self: flex-end;
+        padding-right: 150px;
+        font-weight: 500;
+      }
+
+      .testimonial {
+        width: 550px;
+        height: 200px;
+        border-radius: 20px;
+        background-color: #faf6f1;
+        font-family: "Raleway", sans-serif;
+        margin-left: 60px;
+        padding-left: 10px;
+        /* padding: 30px; */
+        font-style: italic;
+      }
+
+      .testimonial > span {
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .container {
+        display: flex;
+        padding-bottom: 30px;
+        padding-left: 20px;
+      }
+
+      .slider-wrapper {
+        position: relative;
+        max-width: 610px;
+        height: 220px;
+        margin: 0 auto;
+        border-radius: 20px;
+      }
+
+      .testimonial-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-wrapper {
+        position: relative;
+        width: 680px;
+        height: 400px;
+        padding-bottom: 80px;
+        transform: translateY(-50px);
+      }
+
+      .svg-img {
+        position: absolute;
+        height: 580px;
+        width: 570px;
+        top: -30.5%;
+        left: -42%;
+      }
+
+      .testimonial-img {
+        position: absolute;
+        left: -10%;
+        top: 3%;
+        height: 340px;
+        width: 330px;
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 2;
+        filter: drop-shadow(3px 3px 2px rgba(55, 55, 55, 0.3));
+      }
+
+      .svg-img,
+      .testimonial-img {
+        transition: transform 0.5s ease-in-out;
+        transform-origin: center;
+      }
+
+      @media (max-width: 1300px) {
+        .testimonial-content {
+          width: 100vw;
+        }
+
+        .image-wrapper {
+          position: relative;
+          width: 540;
+          height: 550;
+          padding-bottom: 80px;
+        }
+
+        .svg-img {
+          transform: scale(0.95);
+          top: -25.5%;
+          left: -21%;
+        }
+
+        .testimonial-img {
+          transform: scale(0.95);
+          left: 9%;
+          top: 8%;
+        }
+      }
+
+      @media (max-width: 1180px) {
+        .svg-img {
+          transform: scale(0.8);
+        }
+
+        .testimonial-img {
+          transform: scale(0.8);
+        }
+
+        .testimonial-heading {
+          padding-left: 2rem;
+        }
+
+        .testimonial-subheading {
+          padding-right: 0;
+          align-self: center;
+        }
+      }
+
+      @media (max-width: 1130px) {
+        .testimonial-section {
+          padding-bottom: 30px;
+        }
+        .testimonial-content {
+          flex-direction: column;
+        }
+
+        .testimonial-heading {
+          align-self: center;
+          padding: 0;
+        }
+
+        .image-wrapper {
+          padding-bottom: 0;
+          height: 350px;
+        }
+
+        .svg-img {
+          top: -22%;
+          left: 3%;
+          height: 620px;
+          width: 610px;
+        }
+
+        .testimonial-img {
+          left: 24%;
+          top: 17%;
+          height: 370px;
+          width: 360px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .testimonial-section {
+          justify-content: center;
+        }
+        .testimonial {
+          margin-top: 0;
+          width: 470px;
+          font-size: 1rem;
+        }
+
+        .slider {
+          width: 470px;
+        }
+
+        .testimonial-subheading {
+          max-width: 480px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .testimonial-heading {
+          align-self: center;
+          padding: 0;
+        }
+
+        .testimonial {
+          width: 410px;
+          height: 220px;
+          font-size: 15px;
+        }
+
+        .slider {
+          width: 420px;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .testimonial {
+          padding-left: 0;
+          font-size: 14px;
+          width: 350px;
+        }
+
+        .container {
+          padding-left: 0;
+        }
+
+        .slider {
+          width: 350px;
+        }
+
+        .testimonial-subheading {
+          max-width: 350px;
+        }
+      }
+
+      .slider {
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+      }
+
+      .slider div {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+      }
+
+      .slider-nav {
+        display: flex;
+        justify-content: center;
+        padding-block: 20px;
+        column-gap: 1rem;
+        z-index: 1;
+      }
+
+      .slider-nav a {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: #d82094;
+        opacity: 0.75;
+        transition: opacity ease 250ms;
+      }
+
+      .slider-nav a:hover {
+        opacity: 1;
+      }
+
+      .slider-nav a:focus {
+        outline: 2px solid #d82094;
+        outline-offset: 3px;
+      }
+
+      /* .svg-img,
+  .testimonial-img {
+    transition: transform 0.5s ease-in-out;
+    transform-origin: center;
+     z-index: 1; 
+  }
+
+  :global(.glowing-border.right) {
+    width: 70ch;
+    max-width: none !important;
+    z-index: 0; 
+  } */
+    </style>
+  </div>
+</section>

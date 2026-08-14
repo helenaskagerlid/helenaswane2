@@ -1,0 +1,116 @@
+---
+import removeMarkdown from "remove-markdown";
+
+interface Props {
+  title: string;
+  image: string;
+  imageAlt?: string;
+  url: string;
+  bio: string;
+  description?: string;
+  pubDate?: Date;
+}
+
+const { title, image, imageAlt, url, bio, description, pubDate } = Astro.props;
+
+const summary = (text: string, length = 200): string => {
+  const cleanText = removeMarkdown(text, {
+    useImgAltText: false,
+  });
+  if (cleanText.length <= length) return cleanText;
+  return cleanText.substring(0, cleanText.lastIndexOf(" ", length)) + "...";
+};
+
+const formattedDate = pubDate
+  ? new Intl.DateTimeFormat("sv-SE", { dateStyle: "long" }).format(pubDate)
+  : null;
+---
+
+<article class="blog-post">
+  <a class="blog-post-link" href={url}>
+    <div class="image-wrapper">
+      <img
+        class="blog-post-image"
+        src={image}
+        alt={imageAlt ?? title}
+        width="314"
+        height="314"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="blog-post-description">
+      {
+        formattedDate && (
+          <time class="blog-post-date" datetime={pubDate?.toISOString()}>
+            {formattedDate}
+          </time>
+        )
+      }
+      <h3 class="blog-post-title">{title}</h3>
+      <p class="blog-post-summary">{description ?? summary(bio)}</p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .blog-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 250ms ease;
+  }
+
+  .blog-post:hover {
+    transform: translateY(-4px);
+  }
+
+  .blog-post-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .blog-post-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .blog-post-description {
+    padding: 25px;
+    flex: 1;
+  }
+
+  .blog-post-date {
+    display: block;
+    font-size: 0.85rem;
+    color: #8a8484;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-post-title {
+    font-size: 24px;
+    margin: 0 0 0.5rem;
+  }
+
+  .blog-post-summary {
+    margin: 0;
+  }
+</style>

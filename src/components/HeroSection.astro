@@ -1,0 +1,99 @@
+---
+import BackgroundImage from "../assets/hero-img-helena2.jpg";
+import { Image } from "astro:assets";
+---
+
+<div id="home" class="wrapper">
+  <Image
+    class="hero-img"
+    src={BackgroundImage}
+    width="1601"
+    height="1067"
+    alt=""
+    format="webp"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="heading-wrapper">
+    <h1 class="heading">Redo för förändring?</h1>
+  </div>
+</div>
+
+<style>
+  :root {
+    --gradient: linear-gradient(
+      135deg,
+      #fde2e4 0%,
+      #fad2e1 25%,
+      #fbc4ab 50%,
+      #ffb3c1 75%,
+      #ffcfd2 100%
+    );
+  }
+
+  #home {
+    scroll-margin-top: 90px;
+  }
+
+  .wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      #faf6f1 0%,
+      rgba(250, 246, 241, 0) 35%
+    );
+    z-index: 2;
+  }
+
+  .hero-img {
+    position: absolute !important;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 1;
+  }
+
+  @media (max-width: 770px) {
+    .hero-img {
+      object-position: 80% top;
+    }
+  }
+
+  .heading-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(2rem, calc(1.2rem + 4.2vw), 3.5rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    z-index: 3;
+    display: inline-block;
+    max-width: 90vw;
+    text-align: center;
+    margin-bottom: 265px;
+
+    @media (max-width: 883px) {
+      margin-bottom: 340px;
+    }
+  }
+</style>

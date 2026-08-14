@@ -1,0 +1,75 @@
+<section class="scroll-reveal">
+  <h2 class="tc-heading"><span>Transformativ coachning</span></h2>
+  <div class="text-wrapper">
+    <p class="tc-paragraph">
+      <span>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae vitae
+        natus distinctio, assumenda laboriosam similique excepturi reprehenderit
+        incidunt itaque quo recusandae cupiditate vero eligendi quibusdam
+        architecto odit non! Repudiandae excepturi non delectus sint numquam
+        reprehenderit, modi voluptatibus possimus temporibus deleniti
+        praesentium.
+      </span>
+    </p>
+    <button class="book-btn">Boka session</button>
+  </div>
+</section>
+
+<style>
+  section {
+    padding-block: 100px;
+    display: flex;
+    flex-direction: column;
+    max-width: 100vw;
+    height: auto;
+    background: #faf6f1;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    height: auto;
+  }
+
+  .scroll-reveal > * {
+    padding-inline: 150px;
+  }
+
+  .scroll-reveal span {
+    color: hsl(0 0% 100% / 0.2);
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-image: linear-gradient(
+      90deg,
+      rgb(201, 127, 190),
+      rgb(241, 180, 119)
+    );
+    animation: scroll-reveal linear forwards;
+    animation-timeline: view(y);
+  }
+
+  .scroll-reveal h2 span {
+    animation-range-start: cover 20vh;
+    animation-range-end: cover 40vh;
+  }
+
+  .scroll-reveal p span {
+    animation-range-start: cover 25vh;
+    animation-range-end: cover 50vh;
+  }
+
+  @keyframes scroll-reveal {
+    to {
+      background-size: 100% 100%;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 4rem;
+  }
+
+  h2 > p {
+    padding-inline: 100px;
+    line-height: 1.5;
+  }
+</style>

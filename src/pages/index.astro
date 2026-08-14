@@ -1,0 +1,26 @@
+---
+import HeroSection from "../components/HeroSection.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TransformativeCoachingFP from "../components/TransformativeCoachingFP.astro";
+import Testimonials from "../components/Testimonials.astro";
+import SignUpSection from "../components/SignUpSection.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+---
+
+<BaseLayout
+  title="Helena Swane by heart - Startsida"
+  description="Välkommen till Helena Swane - transformativ coaching för dig som är redo för förändring"
+>
+  <HeroSection />
+  <TransformativeCoachingFP />
+  <SectionDivider />
+  <Testimonials />
+  <SignUpSection />
+</BaseLayout>
+
+<!-- <script type="module">
+  import { initScroll } from "/src/scripts/scroll.ts";
+  window.addEventListener("load", () => {
+    initScroll();
+  });
+</script> -->

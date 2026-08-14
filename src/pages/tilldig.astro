@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+---
+
+<BaseLayout title="Till dig">
+  <section class="for-you-section">
+    <h2 class="for-you-heading">Till dig</h2>
+    <Image
+      class="for-you-img"
+      src="/rainbowmountains.jpg"
+      alt="A mountain in the background behind a lake and a pink sky"
+      width={400}
+      height={350}
+      loading="lazy"
+      format="webp"
+    />
+  </section>
+</BaseLayout>
+
+<style>
+  .for-you-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+  }
+</style>

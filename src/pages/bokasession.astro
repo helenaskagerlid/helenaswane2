@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Boka session">
+  <section class="contact-section">
+    <h2 class="contact-heading" id="heading">
+      Fyll i formuläret för bokning, frågor och övrig kontakt
+    </h2>
+    <form
+      action="https://formsubmit.co/helenaskagerlid@gmail.com"
+      method="POST"
+      id="contact-form"
+    >
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="name" placeholder="Ditt namn" required />
+      <input type="email" name="email" placeholder="Din e-post" required />
+      <textarea name="message" placeholder="Ditt meddelande" required
+      ></textarea>
+      <button aria-label="Send message" type="submit">Skicka</button>
+    </form>
+
+    <p id="thankyou" style="display:none; margin-top:1em; color:#d82094;">
+      Tack för ditt meddelande, jag återkommer så snart jag kan!
+    </p>
+  </section>
+
+  <script type="module">
+    const form = document.getElementById("contact-form");
+    const heading = document.getElementById("heading");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = new URLSearchParams(new FormData(form));
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data.toString(),
+        });
+
+        if (response.ok) {
+          form.style.display = "none";
+          heading.style.display = "none";
+          document.getElementById("thankyou").style.display = "block";
+        } else {
+          alert("Något gick fel, försök igen!");
+        }
+      } catch (err) {
+        alert("Något gick fel, försök igen!");
+      }
+    });
+  </script>
+
+  <style>
+    .contact-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      width: 100%;
+    }
+
+    .contact-heading {
+      font-size: 1.3rem;
+      margin-bottom: 50px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 650px;
+      height: 350px;
+      color: #5a5656;
+      border: none;
+    }
+
+    input {
+      height: 50px;
+      background-color: white;
+      color: #5a5656;
+      border: none;
+      padding: 16px;
+    }
+
+    textarea {
+      height: 150px;
+      background-color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 1%;
+      color: #5a5656;
+    }
+
+    button {
+      display: block;
+      width: 150px;
+      padding: 20px;
+      border-radius: 9999px;
+      margin-left: auto;
+      border: none;
+      cursor: pointer;
+      background-color: #d82094;
+      margin-left: auto;
+      color: white;
+      text-transform: uppercase;
+    }
+  </style>
+</BaseLayout>

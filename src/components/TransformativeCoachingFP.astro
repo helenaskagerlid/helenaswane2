@@ -1,0 +1,209 @@
+---
+import { getEntry, render } from "astro:content";
+import ArchGlowingBorder from "../animations/ArchGlowingBorder.astro";
+import StarAnimation from "../animations/StarAnimation.astro";
+import { Image } from "astro:assets";
+---
+
+<section class="transformative-coaching" id="aboutCoachning">
+  <div class="tc-wrapper section-inner">
+    <div class="text-wrapper">
+      <div class="star-wrapper">
+        <StarAnimation />
+        <h2 class="tc-heading">Transformativ Coaching</h2>
+      </div>
+      <h3 class="tc-subheading">
+        Integrative Change Work, Hypnos, NLP, Mindful Tapping, Energimedicin,
+        Healing
+      </h3>
+
+      <div class="tc-text">
+        <p>
+          När du upplever att du sitter fast och vill bli fri från det som
+          hindrar dig.
+        </p>
+        <p>
+          Här blir du mjukt guidad till kontakt med ditt undermedvetna där du
+          kan transformera det som längtar efter förändring.
+        </p>
+        <p>
+          Många upplever att dessa sessioner ger djupgående förändring utan att
+          behöva gräva djupt i det tunga, att processen kan kännas förvånansvärt
+          lättsam och enkel.
+        </p>
+        <p class="italic-text">
+          Du behöver inte bli någon som du inte är, det här är en inbjudan till
+          att få komma hem till dig själv.
+        </p>
+      </div>
+      <a href="/bokasession" class="book-link"
+        ><button aria-label="book a session" class="book-btn"
+          >Boka session</button
+        >
+      </a>
+    </div>
+
+    <div class="image-wrapper">
+      <!-- <ArchGlowingBorder> -->
+      <!-- <div class="arch"> -->
+      <Image
+        class="tc-img"
+        src="/helenaProfil3.png"
+        alt="profile image of Helena Swane in a bright pink jacket and a big smile"
+        width={400}
+        height={350}
+        loading="eager"
+        format="webp"
+      />
+      <!-- </div> -->
+      <!-- </ArchGlowingBorder> -->
+    </div>
+  </div>
+
+  <style>
+    .transformative-coaching {
+      width: 100%;
+      background-color: #faf6f1;
+      padding-top: 120px;
+      padding-bottom: 30px;
+    }
+
+    .tc-wrapper {
+      /* width: 100%;
+      max-width: 100%;
+      overflow-x: hidden; */
+      display: flex;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .tc-heading {
+      font-weight: 400;
+      font-size: clamp(1.5rem, calc(0.2rem + 3vw), 2.5rem);
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .tc-subheading {
+      font-weight: 500;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .tc-text {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .tc-text :global(h4) {
+      font-weight: 500;
+      margin: 0;
+    }
+    .tc-text :global(p) {
+      margin: 0;
+    }
+
+    .text-wrapper {
+      display: block;
+      max-width: 700px;
+      line-height: 1.6;
+      margin-right: 70px;
+    }
+
+    .italic-text {
+      font-style: italic;
+      padding-top: 6px;
+    }
+
+    .book-btn {
+      display: block;
+      width: 160px;
+      padding: 20px;
+      border-radius: 9999px;
+      margin-left: auto;
+      border: none;
+      cursor: pointer;
+      background-color: #ff3b9c;
+      color: #faf6f1;
+      text-decoration: none;
+    }
+
+    .book-link {
+      width: 200px;
+      text-decoration: none;
+      color: #faf6f1;
+      font-size: 18px;
+    }
+
+    .svg-blob {
+      position: absolute;
+      height: 500px;
+      width: 480px;
+      top: 0;
+      left: 0;
+    }
+
+    .image-wrapper {
+      flex: 0 0 315px;
+      transform: translateY(-34px);
+    }
+
+    .arch {
+      width: 100%;
+      height: 100%;
+      border-radius: 200px 200px 0 0;
+      overflow: hidden;
+      background: #faf6f1;
+    }
+
+    .tc-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10%;
+    }
+
+    .star-wrapper {
+      display: flex;
+      position: relative;
+    }
+
+    @media (max-width: 1100px) {
+      .tc-wrapper {
+        flex-direction: column-reverse;
+        gap: 30px;
+      }
+
+      .tc-img {
+        width: 250px;
+      }
+
+      .text-wrapper {
+        margin-right: 0px;
+        padding-inline: 20px;
+      }
+
+      .transformative-coaching {
+        padding-bottom: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .text-wrapper {
+        max-width: 350px;
+        padding-inline: 0;
+      }
+
+      .tc-heading {
+        font-size: 1.4rem;
+      }
+
+      .book-btn {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</section>
