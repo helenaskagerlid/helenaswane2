@@ -2,7 +2,9 @@ backend:
   name: github
   repo: helenaskagerlid/helenaswane2
   branch: main
-  base_url: https://netlify-cms-github-oauth-provider-kuzuq16zw.vercel.app
+  # Inloggningen sköts av sajtens egna funktioner i /api
+  base_url: https://helenaswane2.vercel.app
+  auth_endpoint: api/auth
 
 # Gör att `npm run cms` fungerar lokalt utan inloggning
 local_backend: true

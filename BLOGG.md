@@ -48,31 +48,37 @@ repo: helenaskagerlid/helenaswane2
 branch: main
 ```
 
-### 2. Koppla på GitHub-inloggning
+### 2. GitHub-inloggningen
 
-Decap behöver en liten OAuth-tjänst eftersom GitHub inte tillåter inloggning
-direkt från webbläsaren. Enklaste vägen på Vercel:
+GitHub tillåter inte inloggning direkt från webbläsaren – `client_secret` får
+aldrig ligga i frontend-koden. Därför sköts växlingen av två serverless-
+funktioner i `api/`, som Vercel kör åt oss:
 
-1. Skapa en **GitHub OAuth App**: GitHub → Settings → Developer settings → OAuth Apps → New.
-   - Homepage URL: `https://helenaswane.vercel.app`
-   - Authorization callback URL: `https://<din-oauth-proxy>.vercel.app/callback`
-   - Spara **Client ID** och **Client Secret**.
-2. Deploya en färdig OAuth-proxy till Vercel (t.ex.
-   [`vencax/netlify-cms-github-oauth-provider`](https://github.com/vencax/netlify-cms-github-oauth-provider))
-   och sätt miljövariablerna `OAUTH_CLIENT_ID` och `OAUTH_CLIENT_SECRET`.
-3. Sätt proxyns URL som `base_url` i `public/admin/config.yml`:
+| Fil | Vad den gör |
+| --- | --- |
+| `api/auth.js` | Skickar användaren till GitHub med ett slumpat `state` |
+| `api/callback.js` | Tar emot koden, växlar den mot en token, skickar den till CMS-fönstret |
 
-   ```yaml
-   base_url: https://<din-oauth-proxy>.vercel.app
-   ```
+De ligger på **samma domän** som sajten, vilket gör att inga origin-inställningar
+behövs. Miljövariabler läses inuti funktionerna, aldrig på modulnivå – annars
+kraschar de vid uppstart på Vercel innan variablerna hunnit injiceras.
+
+**Det som krävs för att det ska fungera:**
+
+1. En **GitHub OAuth App** (GitHub → Settings → Developer settings → OAuth Apps):
+   - Homepage URL: `https://helenaswane2.vercel.app`
+   - Authorization callback URL: `https://helenaswane2.vercel.app/api/callback`
+2. Två miljövariabler i **sajtens** Vercel-projekt (inte i något annat projekt):
+   - `GITHUB_CLIENT_ID`
+   - `GITHUB_CLIENT_SECRET`
+3. Redeploy efter att variablerna lagts in – de läses in vid bygget.
+
+Byter sajten domän måste callback-URL:en i GitHub-appen uppdateras till samma
+domän, annars nekar GitHub inloggningen.
 
 Helena behöver ett GitHub-konto med skrivrättigheter till repot. När hon sparar
 ett inlägg committas det till `main`, och Vercel bygger om sajten automatiskt
 (ca en minut innan det syns).
-
-Alternativ om GitHub-konton känns krångligt: byt backend till
-[Sveltia CMS](https://github.com/sveltia/sveltia-cms) (samma config-format) eller
-en tjänst med egen inloggning, t.ex. Tina eller Netlify Identity via Netlify.
 
 ## Städa bort testinläggen
 
