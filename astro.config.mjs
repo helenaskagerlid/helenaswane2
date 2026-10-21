@@ -4,7 +4,7 @@ import path from "path";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://helenaswane.vercel.app/",
+  site: "https://helenaswane2.vercel.app/",
   redirects: {
     "/bokasession": "/kontakt",
     "/omhelena": "/ommig",

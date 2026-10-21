@@ -1,27 +1,51 @@
 ---
+import { getEntry } from "astro:content";
+
 interface Props {
-  bgImage?: string;
+  // Vilken bakgrundsbild från nyhetsbrev.yml som ska användas
+  background?: "home" | "contact";
 }
 
-const { bgImage = "/rainbowbutterfly.webp" } = Astro.props;
-const bgUrl = `url("${bgImage}")`;
+const { background = "home" } = Astro.props;
+
+// Texterna redigeras i CMS:et (src/content/pages/nyhetsbrev.yml)
+const entry = await getEntry("newsletter", "nyhetsbrev");
+if (!entry) throw new Error("src/content/pages/nyhetsbrev.yml saknas");
+const { heading, subheading, tagline, text, boxHeading, backgrounds } =
+  entry.data;
+
+// Tom rad i CMS:et = nytt stycke
+const paragraphs = text
+  .split(/\n\s*\n/)
+  .map((p) => p.trim())
+  .filter(Boolean);
+
+const bgUrl = `url("${backgrounds[background]}")`;
 ---
 
 <section class="sign-up-section">
   <div class="sign-up-box">
     <div class="sign-up-wrapper">
-      <h2 class="sign-up-heading">För dig som vill hålla kontakten</h2>
+      <h2 class="sign-up-heading">{heading}</h2>
 
-<h2 class="sign-up-heading-2">Inre skiften</h2>
+      <h2 class="sign-up-heading-2">{subheading}</h2>
 
-<p class="cursive-text">små steg som gör skillnad</p>
-<p class="sign-up-text">
-  Till dig som är nyfiken på förändring, inre trygghet och hur du kan möta dig själv med kärlek och omtanke.<br/>
- <br/>
-Varmt välkommen att fylla i din mailadress här om du vill få mail från mig. <br/>
- <br/>
-Jag ser fram emot att hålla kontakten och dela tankar, reflektioner och inspiration om allt det magiska vi kallar livet.
-</p>
+      {tagline && <p class="cursive-text">{tagline}</p>}
+      <p class="sign-up-text">
+        {
+          paragraphs.map((p, i) => (
+            <>
+              {i > 0 && (
+                <>
+                  <br />
+                  <br />
+                </>
+              )}
+              {p}
+            </>
+          ))
+        }
+      </p>
 
     </div>
     <div id="mc_embed_shell">
@@ -34,7 +58,7 @@ Jag ser fram emot att hålla kontakten och dela tankar, reflektioner och inspira
 </style>
 <div id="mc_embed_signup">
     <form action="https://gmail.us1.list-manage.com/subscribe/post?u=5f0a8c1cffc88518a5668ff42&amp;id=9a81288785&amp;f_id=009000e2f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-        <div id="mc_embed_signup_scroll"><h2>Ja, jag vill hålla kontakten</h2>
+        <div id="mc_embed_signup_scroll"><h2>{boxHeading}</h2>
             <div class="indicates-required"><span class="asterisk">*</span> obligatoriskt att fylla i</div>
             <div class="mc-field-group"><label for="mce-FNAME">Namn <span class="asterisk">*</span></label><input type="text" name="FNAME" class="required text"  id="mce-FNAME" value=""></div><div class="mc-field-group"><label for="mce-EMAIL">Din mailadress <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" value="" required=""></div>
         <div id="mce-responses" class="clear foot">

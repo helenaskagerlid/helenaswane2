@@ -1,0 +1,293 @@
+/* Stilar för förhandsvisningen i CMS:et. Speglar sajtens utseende. */
+
+body {
+  margin: 0;
+  padding: 2rem 1.5rem;
+  background-color: #faf6f1;
+  color: #5a5656;
+  font-family: "Inter", sans-serif;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Blogginlägg, som src/pages/blogg/[slug].astro */
+.post {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.post-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.post-date {
+  font-size: 0.9rem;
+  color: #8a8484;
+}
+
+.post-title {
+  font-size: 2.2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0.5rem 0 0;
+}
+
+.post-hero {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 2.5rem;
+}
+
+.post-body {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 2rem auto;
+}
+
+.post-body h2,
+.post-body h3 {
+  font-weight: 400;
+  margin-top: 2.5rem;
+}
+
+.post-body a {
+  color: #d82094;
+}
+
+.post-body blockquote {
+  border-left: 3px solid #f492b8;
+  margin-left: 0;
+  padding-left: 1.5rem;
+  font-style: italic;
+}
+
+/* Kontaktsidan, som src/pages/kontakt.astro */
+.contact-section,
+.inner-power-section {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.contact-heading {
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #cfa734;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.contact-section p,
+.inner-power-section p {
+  margin: 0 0 1em;
+  line-height: 1.5;
+}
+
+.cursive-text {
+  font-style: italic;
+}
+
+.form-placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.form-placeholder .field {
+  background: white;
+  padding: 16px;
+  font-size: 0.85rem;
+  color: #a9a4a4;
+}
+
+.form-placeholder .field.tall {
+  height: 120px;
+}
+
+.pill-button {
+  display: inline-block;
+  padding: 20px 30px;
+  border-radius: 9999px;
+  background-color: #ff3b9c;
+  color: white;
+  text-transform: uppercase;
+  margin-top: 1em;
+}
+
+.pill-button.right {
+  align-self: flex-end;
+}
+
+.section-divider {
+  position: relative;
+  height: 150px;
+  margin: 80px -1.5rem;
+  overflow: hidden;
+}
+
+.divider-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  opacity: 0.8;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.section-divider::before {
+  background: linear-gradient(to bottom, #faf6f1 0%, rgba(250, 246, 241, 0) 35%);
+}
+
+.section-divider::after {
+  background: linear-gradient(to top, #faf6f1 0%, rgba(250, 246, 241, 0) 30%);
+}
+
+/* Nyhetsbrevet, kopierat från src/components/SignUpSection.astro.
+   Mailchimps egen CSS laddas i preview.js. */
+.sign-up-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #8a8484;
+}
+
+.sign-up-section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  width: calc(100% + 3rem);
+  margin: 0 -1.5rem 2rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.sign-up-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 246, 241, 0.4);
+}
+
+.sign-up-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  width: 75%;
+  margin-block: 30px;
+  background-color: #faf6f1;
+  opacity: 80%;
+  padding: 50px;
+  gap: 70px;
+}
+
+.sign-up-wrapper {
+  margin: 0;
+}
+
+.sign-up-text {
+  margin: 12px 0 0 0;
+}
+
+.sign-up-heading {
+  font-family: "Parisienne", sans-serif;
+  font-size: 2.1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.sign-up-heading-2 {
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.sign-up-wrapper .cursive-text {
+  font-style: italic;
+  margin: 0;
+}
+
+#mc_embed_signup {
+  clear: left;
+  font: 14px Helvetica, Arial, sans-serif;
+  background-color: #ff3b9c !important;
+  max-width: 350px;
+  padding: 10px;
+  border-radius: 10%;
+}
+
+#mc_embed_signup,
+#mc_embed_signup * {
+  color: #ffffff !important;
+}
+
+#mc_embed_signup input {
+  color: #5a5656 !important;
+  background-color: white !important;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* Knappen som den ser ut på sajten */
+#mc_embed_signup .button {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 22px;
+  margin: 0 5px 10px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#mc_embed_signup h2 {
+  color: #ffffff !important;
+  margin: 0;
+}
+
+#mc_embed_signup_scroll {
+  position: relative !important;
+}
+
+@media (max-width: 1130px) {
+  .sign-up-box {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  #mc_embed_signup {
+    max-width: 290px;
+  }
+
+  .sign-up-box {
+    width: 85%;
+    padding: 30px;
+  }
+}
