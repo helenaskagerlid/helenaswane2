@@ -1,25 +1,46 @@
 ---
 import BgImage from "../assets/pinkBgHelena.png";
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src?: ImageMetadata | string;
+  position?: string;
+  opacity?: number;
+  height?: string;
+}
+
+const {
+  src = BgImage,
+  position = "center 80%",
+  opacity = 1,
+  height = "180px",
+} = Astro.props;
 ---
 
 <section class="section-divider">
-  <Image
-    class="divider-img"
-    src={BgImage}
-    alt=""
-    width="937"
-    height="521"
-    loading="lazy"
-    format="webp"
-  />
+  {
+    typeof src === "string" ? (
+      <img class="divider-img" src={src} alt="" loading="lazy" />
+    ) : (
+      <Image
+        class="divider-img"
+        src={src}
+        alt=""
+        width="937"
+        height="521"
+        loading="lazy"
+        format="webp"
+      />
+    )
+  }
 </section>
 
-<style>
+<style define:vars={{ position, opacity, height }}>
   .section-divider {
     margin-block: 80px;
     position: relative;
-    height: 180px;
+    height: var(--height);
     width: 100%;
     overflow: hidden;
   }
@@ -31,7 +52,8 @@ import { Image } from "astro:assets";
     height: 100%;
     object-fit: cover;
     z-index: 1;
-    object-position: center 80%;
+    object-position: var(--position);
+    opacity: var(--opacity);
   }
 
   .section-divider::before {

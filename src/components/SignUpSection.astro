@@ -1,3 +1,12 @@
+---
+interface Props {
+  bgImage?: string;
+}
+
+const { bgImage = "/rainbowbutterfly.webp" } = Astro.props;
+const bgUrl = `url("${bgImage}")`;
+---
+
 <section class="sign-up-section">
   <div class="sign-up-box">
     <div class="sign-up-wrapper">
@@ -507,14 +516,14 @@ Jag ser fram emot att hålla kontakten och dela tankar, reflektioner och inspira
   }
 </script>
 
-<style>
+<style define:vars={{ bgUrl }}>
   .sign-up-section {
     display: flex;
     justify-content: center;
     position: relative;
     align-items: center;
     width: 100%;
-    background: url("/rainbowbutterfly.webp") no-repeat center center;
+    background: var(--bgUrl) no-repeat center center;
     background-size: cover;
   }
 

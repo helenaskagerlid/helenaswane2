@@ -5,6 +5,10 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://helenaswane.vercel.app/",
+  redirects: {
+    "/bokasession": "/kontakt",
+    "/omhelena": "/ommig",
+  },
   vite: {
     resolve: {
       alias: {
