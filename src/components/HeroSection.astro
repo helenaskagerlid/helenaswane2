@@ -1,12 +1,17 @@
 ---
-import BackgroundImage from "../assets/hero-img-helena2.jpg";
 import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+
+// Redigeras i CMS:et (src/content/pages/startsida.yml)
+const page = await getEntry("homePage", "startsida");
+if (!page) throw new Error("src/content/pages/startsida.yml saknas");
+const { hero } = page.data;
 ---
 
 <div id="home" class="wrapper">
   <Image
     class="hero-img"
-    src={BackgroundImage}
+    src={hero.image}
     width="1601"
     height="1067"
     alt=""
@@ -15,7 +20,7 @@ import { Image } from "astro:assets";
     fetchpriority="high"
   />
   <div class="heading-wrapper">
-    <h1 class="heading">Redo för förändring?</h1>
+    <h1 class="heading">{hero.heading}</h1>
   </div>
 </div>
 

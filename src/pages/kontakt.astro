@@ -3,18 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionDivider from "../components/SectionDivider.astro";
 import SignUpSection from "../components/SignUpSection.astro";
 import { getEntry } from "astro:content";
+import { paragraphs } from "../utils/paragraphs";
 
 // Texterna och bilderna redigeras i CMS:et (src/content/pages/kontakt.yml)
 const page = await getEntry("contactPage", "kontakt");
 if (!page) throw new Error("src/content/pages/kontakt.yml saknas");
 const { intro, divider, innerPower } = page.data;
-
-// Tom rad i CMS:et = nytt stycke
-const paragraphs = (text: string) =>
-  text
-    .split(/\n\s*\n/)
-    .map((p) => p.trim())
-    .filter(Boolean);
 ---
 
 <BaseLayout title="Kontakt">

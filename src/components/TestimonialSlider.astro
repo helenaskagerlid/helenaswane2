@@ -1,60 +1,34 @@
 ---
-import { getEntry } from "astro:content";
+interface Props {
+  items: { quote: string; name: string }[];
+}
 
-const testimonial1 = await getEntry("testimonials", "testimonial1");
-const testimonial2 = await getEntry("testimonials", "testimonial2");
-const testimonial3 = await getEntry("testimonials", "testimonial3");
+const { items } = Astro.props;
 ---
 
 <section class="testimonial-section" id="testimonials">
   <div class="slider-wrapper">
     <div class="slider">
-      <div class="slide">
-        Wow, vilken härlig session. Helena har en fantastisk förmåga att guida
-        på ett så kärleksfullt, varmt och tryggt sätt. Vi jobbade med ett
-        mönster jag kämpat med under en längre tid och på ett lekfullt och
-        roligt sätt har Helena hjälpt mig att skifta det. Oro har bytts ut mot
-        lugn, pepp och glädje. Alla som vill bli coachade med ledord som
-        trygghet, lekfullhet och kärlek borde testa en session med Helena! Tusen
-        tack! ❤<br />
-        <span>- Helena</span>
-      </div>
-      <div class="slide">
-        Coachingen med Helena gav resultat direkt. Mitt motstånd mot att ta tag
-        i saker har minskat markant och förändringen sitter fortfarande i en
-        månad senare. Helena är en varm och intuitiv coach som jag verkligen
-        rekommenderar.<br />
-        <span>- Johanna</span>
-      </div>
-      <div class="slide">
-        Det var fantastiskt att kunna arbeta med något så djupt och svårt utan
-        att det kändes tungt eller överväldigande. Helena är trygg, lugn och
-        professionell och jag rekommenderar henne verkligen som coach.<br />
-        <span>- Linda</span>
-      </div>
-      <div class="slide">
-        Vill verkligen rekommendera Helenas sessioner. Jag hade känslor och
-        tankar som drog ner mig rejält. Men med Helenas vägledning har jag
-        hittat ut från både känslan och de mörka tankarna. Det var nästan som
-        magi, att på en timma förändra något som dragit ner mig så länge. Och
-        det bästa av allt är att det håller i sig..<br />
-        <span>- Eva</span>
-      </div>
-      <div class="slide">
-        Jag upplevde sessionen som en varm sommarvind. Mjuk, behaglig och fylld
-        av tillit.<span>- Veronica</span>
-      </div>
+      {
+        items.map(({ quote, name }) => (
+          <div class="slide">
+            {quote}
+            <br />
+            <span>- {name}</span>
+          </div>
+        ))
+      }
     </div>
 
     <button aria-label="show previous testimonial" class="prev-btn">‹</button>
     <button aria-label="show next testimonial" class="next-btn">›</button>
 
     <div class="slider-nav">
-      <button aria-label="Gå till testimonial 1" class="nav-btn"></button>
-      <button aria-label="Gå till testimonial 2" class="nav-btn"></button>
-      <button aria-label="Gå till testimonial 3" class="nav-btn"></button>
-      <button aria-label="Gå till testimonial 4" class="nav-btn"></button>
-      <button aria-label="Gå till testimonial 5" class="nav-btn"></button>
+      {
+        items.map((_, i) => (
+          <button aria-label={`Gå till testimonial ${i + 1}`} class="nav-btn" />
+        ))
+      }
     </div>
   </div>
 </section>

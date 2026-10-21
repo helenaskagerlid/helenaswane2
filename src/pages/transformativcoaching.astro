@@ -1,23 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
+import { paragraphs } from "../utils/paragraphs";
+
+// Redigeras i CMS:et (src/content/pages/transformativcoaching.yml)
+const page = await getEntry("coachingPage", "transformativcoaching");
+if (!page) throw new Error("src/content/pages/transformativcoaching.yml saknas");
+const { heading, text } = page.data;
 ---
 
 <BaseLayout title="Transformativ Coaching" description="">
   <section class="tc-section">
-    <h2>Transformativ Coaching</h2>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, quam?
-      Aspernatur optio ducimus tempore delectus tenetur, fugiat a inventore
-      nobis nemo enim, dicta porro eaque quos, nisi impedit magnam deleniti!
-      Dolore dolor obcaecati ducimus consectetur doloremque cupiditate at
-      asperiores voluptas qui quas, animi iure explicabo sapiente autem placeat
-      recusandae vel nostrum ea numquam id facilis provident iusto facere
-      aliquid. Omnis voluptates architecto eligendi id ex quaerat, dolores modi
-      quisquam consequatur eveniet, minima, nemo nulla optio. Non aperiam sit
-      praesentium officiis tempore architecto enim nostrum ea similique
-      repellendus molestias, tenetur culpa voluptas ex iusto ducimus aspernatur
-      amet quibusdam debitis ipsum qui.
-    </p>
+    <h2>{heading}</h2>
+    {paragraphs(text).map((p) => <p>{p}</p>)}
   </section>
 </BaseLayout>
 
