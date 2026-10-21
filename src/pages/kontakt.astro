@@ -2,20 +2,26 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionDivider from "../components/SectionDivider.astro";
 import SignUpSection from "../components/SignUpSection.astro";
+import { getEntry } from "astro:content";
+
+// Texterna och bilderna redigeras i CMS:et (src/content/pages/kontakt.yml)
+const page = await getEntry("contactPage", "kontakt");
+if (!page) throw new Error("src/content/pages/kontakt.yml saknas");
+const { intro, divider, innerPower } = page.data;
+
+// Tom rad i CMS:et = nytt stycke
+const paragraphs = (text: string) =>
+  text
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
 ---
 
 <BaseLayout title="Kontakt">
   <section class="contact-section">
     <div class="contact-intro" id="heading">
-      <h2 class="contact-heading">Ser fram emot att höra från dig</h2>
-      <p>
-        Vill du boka en session, ställa frågor eller veta mer om hur
-        transformativ coaching kan vara en hjälp för dig?
-      </p>
-      <p>
-        Varmt välkommen att fylla i formuläret nedan, så återkommer jag så snart
-        jag har möjlighet.
-      </p>
+      <h2 class="contact-heading">{intro.heading}</h2>
+      {paragraphs(intro.text).map((p) => <p>{p}</p>)}
     </div>
     <form
       action="https://formsubmit.co/helenaskagerlid@gmail.com"
@@ -51,47 +57,27 @@ import SignUpSection from "../components/SignUpSection.astro";
   </section>
 
   <SectionDivider
-    src="/roses-divider.webp"
+    src={divider.image}
     position="center 35%"
     opacity={0.8}
     height="150px"
   />
 
   <section class="inner-power-section">
-    <h2 class="contact-heading">Din inre kraft</h2>
-    <p>
-      Välkommen till en varm gemenskap med energiövningar, inspiration och små
-      påminnelser om att möta dig själv med mer omtanke, närvaro och tillit.
-    </p>
-    <p>
-      Medlemsportalen Din Inre Kraft är min kostnadsfria Facebookgrupp där jag
-      delar inspiration, energiövningar och reflektioner för dig som vill skapa
-      mer balans, närvaro och kontakt med dig själv i vardagen.
-    </p>
-    <p>
-      I gruppen hittar du enkla övningar, inspiration och reflektioner kring
-      Change Work, våra känslor, upplevelser, mönster och inre utveckling. Här
-      har du också möjlighet att ställa frågor om du vill. Ibland har vi även
-      kortdragningar med orakelkort som en hjälp till reflektion, fördjupning
-      och inspiration.
-    </p>
-    <p>
-      Det är en trygg plats där du får fylla på, landa i dig själv och påminnas
-      om den kraft, visdom och möjlighet till förändring som redan finns inom
-      dig.
-    </p>
-    <p class="cursive-text">Varmt välkommen!</p>
+    <h2 class="contact-heading">{innerPower.heading}</h2>
+    {paragraphs(innerPower.text).map((p) => <p>{p}</p>)}
+    {innerPower.closing && <p class="cursive-text">{innerPower.closing}</p>}
     <a
       class="pill-button"
-      href="https://www.facebook.com/groups/2725402944445316/"
+      href={innerPower.buttonLink}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Bli medlem i Din Inre Kraft
+      {innerPower.buttonText}
     </a>
   </section>
 
-  <SignUpSection bgImage="/roses-contactpage.jpg" />
+  <SignUpSection background="contact" />
 
   <script type="module">
     const form = document.getElementById("contact-form");
