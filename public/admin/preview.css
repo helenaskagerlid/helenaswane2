@@ -291,3 +291,172 @@ h3 {
     padding: 30px;
   }
 }
+
+/* Startsidan, som HeroSection, TransformativeCoachingFP och Testimonials */
+.hero {
+  position: relative;
+  height: 420px;
+  margin: -2rem -1.5rem 0;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #faf6f1 0%, rgba(250, 246, 241, 0) 35%);
+  z-index: 2;
+}
+
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero-heading {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.tc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding-top: 60px;
+}
+
+.tc-img {
+  width: 250px;
+  border-radius: 10%;
+}
+
+.text-wrapper {
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.tc-heading {
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.tc-subheading {
+  font-weight: 500;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.tc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.tc-text p {
+  margin: 0;
+}
+
+.italic-text {
+  font-style: italic;
+  padding-top: 6px;
+}
+
+.book-btn {
+  display: block;
+  width: 160px;
+  margin: 20px 0 0 auto;
+  padding: 20px;
+  border-radius: 9999px;
+  background-color: #ff3b9c;
+  color: #faf6f1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.testimonial-section {
+  padding-top: 60px;
+  text-align: center;
+}
+
+.testimonial-heading {
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.testimonial-img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 20px auto;
+  display: block;
+}
+
+.preview-note {
+  font-size: 0.8rem;
+  color: #8a8484;
+}
+
+.slide {
+  background: #fff;
+  border-radius: 15px;
+  font-style: italic;
+  padding: 30px 40px;
+  margin: 0 auto 12px;
+  max-width: 650px;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.slide span {
+  font-weight: 600;
+  display: block;
+  margin-top: 10px;
+}
+
+/* Transformativ coaching och Om mig */
+.text-page {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.text-page-heading {
+  font-weight: 400;
+  font-size: 40px;
+  text-transform: uppercase;
+  color: #2b2929;
+  margin: 0 0 1rem;
+}
+
+.blob-wrapper {
+  margin-top: 2rem;
+  padding: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e35b7d, #f7a3c6);
+  width: 360px;
+  max-width: 100%;
+}
+
+.blob-img {
+  width: 100%;
+  object-fit: contain;
+}

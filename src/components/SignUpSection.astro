@@ -1,5 +1,6 @@
 ---
 import { getEntry } from "astro:content";
+import { paragraphs } from "../utils/paragraphs";
 
 interface Props {
   // Vilken bakgrundsbild från nyhetsbrev.yml som ska användas
@@ -14,12 +15,6 @@ if (!entry) throw new Error("src/content/pages/nyhetsbrev.yml saknas");
 const { heading, subheading, tagline, text, boxHeading, backgrounds } =
   entry.data;
 
-// Tom rad i CMS:et = nytt stycke
-const paragraphs = text
-  .split(/\n\s*\n/)
-  .map((p) => p.trim())
-  .filter(Boolean);
-
 const bgUrl = `url("${backgrounds[background]}")`;
 ---
 
@@ -33,7 +28,7 @@ const bgUrl = `url("${backgrounds[background]}")`;
       {tagline && <p class="cursive-text">{tagline}</p>}
       <p class="sign-up-text">
         {
-          paragraphs.map((p, i) => (
+          paragraphs(text).map((p, i) => (
             <>
               {i > 0 && (
                 <>

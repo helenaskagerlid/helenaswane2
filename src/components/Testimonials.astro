@@ -1,14 +1,22 @@
 ---
 import TestimonialSlider from "./TestimonialSlider.astro";
 import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+
+// Redigeras i CMS:et (src/content/pages/startsida.yml)
+const page = await getEntry("homePage", "startsida");
+if (!page) throw new Error("src/content/pages/startsida.yml saknas");
+const { testimonials } = page.data;
 ---
 
 <section class="testimonial-section" id="testimonials">
   <div class="testimonial-wrapper section-inner">
-    <h2 class="testimonial-heading">Testimonials</h2>
-    <p class="testimonial-subheading">
-      Ord från några av de klienter jag haft glädjen att arbeta med
-    </p>
+    <h2 class="testimonial-heading">{testimonials.heading}</h2>
+    {
+      testimonials.subheading && (
+        <p class="testimonial-subheading">{testimonials.subheading}</p>
+      )
+    }
 
     <div class="testimonial-content">
       <div class="image-wrapper">
@@ -67,15 +75,15 @@ import { Image } from "astro:assets";
         </svg>
         <Image
           class="testimonial-img"
-          src="/rainbowbutterfly.webp"
-          alt="Round and colorful image of a golden butterfly with a blurred background"
+          src={testimonials.image}
+          alt={testimonials.imageAlt}
           width={380}
           height={390}
           loading="eager"
           format="webp"
         />
       </div>
-      <TestimonialSlider />
+      <TestimonialSlider items={testimonials.items} />
     </div>
 
     <style>

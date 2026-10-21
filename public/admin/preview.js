@@ -84,6 +84,98 @@ const ContactPreview = createClass({
   },
 });
 
+const HomePreview = createClass({
+  render() {
+    const { entry, getAsset } = this.props;
+    const get = (...path) => entry.getIn(["data", ...path]);
+    const items = get("testimonials", "items");
+
+    return h(
+      "div",
+      {},
+      h(
+        "div",
+        { className: "hero" },
+        h("img", {
+          className: "hero-img",
+          src: assetUrl(getAsset, get("hero", "image")),
+          alt: "",
+        }),
+        h("h1", { className: "hero-heading" }, get("hero", "heading"))
+      ),
+      h(
+        "section",
+        { className: "tc-wrapper" },
+        h("img", {
+          className: "tc-img",
+          src: assetUrl(getAsset, get("coaching", "image")),
+          alt: get("coaching", "imageAlt") || "",
+        }),
+        h(
+          "div",
+          { className: "text-wrapper" },
+          h("h2", { className: "tc-heading" }, get("coaching", "heading")),
+          get("coaching", "subheading") &&
+            h("h3", { className: "tc-subheading" }, get("coaching", "subheading")),
+          h(
+            "div",
+            { className: "tc-text" },
+            ...paragraphs(get("coaching", "text")).map((p) => h("p", {}, p)),
+            get("coaching", "closing") &&
+              h("p", { className: "italic-text" }, get("coaching", "closing"))
+          ),
+          h("span", { className: "book-btn" }, get("coaching", "buttonText"))
+        )
+      ),
+      h(
+        "section",
+        { className: "testimonial-section" },
+        h("h2", { className: "testimonial-heading" }, get("testimonials", "heading")),
+        get("testimonials", "subheading") &&
+          h(
+            "p",
+            { className: "testimonial-subheading" },
+            get("testimonials", "subheading")
+          ),
+        h("img", {
+          className: "testimonial-img",
+          src: assetUrl(getAsset, get("testimonials", "image")),
+          alt: get("testimonials", "imageAlt") || "",
+        }),
+        h(
+          "p",
+          { className: "preview-note" },
+          "På sajten visas omdömena ett i taget i ett bildspel."
+        ),
+        ...(items ? items.toJS() : []).map(({ quote, name }) =>
+          h("div", { className: "slide" }, quote, h("span", {}, "- " + name))
+        )
+      )
+    );
+  },
+});
+
+const TextPagePreview = createClass({
+  render() {
+    const { entry, getAsset } = this.props;
+    const get = (key) => entry.getIn(["data", key]);
+    const image = assetUrl(getAsset, get("image"));
+
+    return h(
+      "section",
+      { className: "text-page" },
+      h("h2", { className: "text-page-heading" }, get("heading")),
+      ...paragraphs(get("text")).map((p) => h("p", {}, p)),
+      image &&
+        h(
+          "div",
+          { className: "blob-wrapper" },
+          h("img", { className: "blob-img", src: image, alt: get("imageAlt") || "" })
+        )
+    );
+  },
+});
+
 // Samma uppmärkning som SignUpSection.astro, inklusive Mailchimp-formuläret
 const mailchimpField = (label, type) =>
   h(
@@ -185,5 +277,8 @@ CMS.registerPreviewStyle(
 );
 CMS.registerPreviewStyle("/admin/preview.css");
 CMS.registerPreviewTemplate("blog", BlogPreview);
+CMS.registerPreviewTemplate("startsida", HomePreview);
+CMS.registerPreviewTemplate("transformativcoaching", TextPagePreview);
+CMS.registerPreviewTemplate("ommig", TextPagePreview);
 CMS.registerPreviewTemplate("kontakt", ContactPreview);
 CMS.registerPreviewTemplate("nyhetsbrev", NewsletterPreview);

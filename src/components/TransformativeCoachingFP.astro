@@ -1,8 +1,14 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getEntry } from "astro:content";
+import { paragraphs } from "../utils/paragraphs";
 import ArchGlowingBorder from "../animations/ArchGlowingBorder.astro";
 import StarAnimation from "../animations/StarAnimation.astro";
 import { Image } from "astro:assets";
+
+// Redigeras i CMS:et (src/content/pages/startsida.yml)
+const page = await getEntry("homePage", "startsida");
+if (!page) throw new Error("src/content/pages/startsida.yml saknas");
+const { coaching } = page.data;
 ---
 
 <section class="transformative-coaching" id="aboutCoachning">
@@ -10,35 +16,17 @@ import { Image } from "astro:assets";
     <div class="text-wrapper">
       <div class="star-wrapper">
         <StarAnimation />
-        <h2 class="tc-heading">Transformativ Coaching</h2>
+        <h2 class="tc-heading">{coaching.heading}</h2>
       </div>
-      <h3 class="tc-subheading">
-        Integrative Change Work, Hypnos, NLP, Mindful Tapping, Energimedicin,
-        Healing
-      </h3>
+      {coaching.subheading && <h3 class="tc-subheading">{coaching.subheading}</h3>}
 
       <div class="tc-text">
-        <p>
-          När du upplever att du sitter fast och vill bli fri från det som
-          hindrar dig.
-        </p>
-        <p>
-          Här blir du mjukt guidad till kontakt med ditt undermedvetna där du
-          kan transformera det som längtar efter förändring.
-        </p>
-        <p>
-          Många upplever att dessa sessioner ger djupgående förändring utan att
-          behöva gräva djupt i det tunga, att processen kan kännas förvånansvärt
-          lättsam och enkel.
-        </p>
-        <p class="italic-text">
-          Du behöver inte bli någon som du inte är, det här är en inbjudan till
-          att få komma hem till dig själv.
-        </p>
+        {paragraphs(coaching.text).map((p) => <p>{p}</p>)}
+        {coaching.closing && <p class="italic-text">{coaching.closing}</p>}
       </div>
       <a href="/kontakt" class="book-link"
         ><button aria-label="book a session" class="book-btn"
-          >Boka session</button
+          >{coaching.buttonText}</button
         >
       </a>
     </div>
@@ -48,8 +36,8 @@ import { Image } from "astro:assets";
       <!-- <div class="arch"> -->
       <Image
         class="tc-img"
-        src="/helenaProfil3.png"
-        alt="profile image of Helena Swane in a bright pink jacket and a big smile"
+        src={coaching.image}
+        alt={coaching.imageAlt}
         width={400}
         height={350}
         loading="eager"
