@@ -1,0 +1,224 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import SignUpSection from "../components/SignUpSection.astro";
+---
+
+<BaseLayout title="Kontakt">
+  <section class="contact-section">
+    <div class="contact-intro" id="heading">
+      <h2 class="contact-heading">Ser fram emot att höra från dig</h2>
+      <p>
+        Vill du boka en session, ställa frågor eller veta mer om hur
+        transformativ coaching kan vara en hjälp för dig?
+      </p>
+      <p>
+        Varmt välkommen att fylla i formuläret nedan, så återkommer jag så snart
+        jag har möjlighet.
+      </p>
+    </div>
+    <form
+      action="https://formsubmit.co/helenaskagerlid@gmail.com"
+      method="POST"
+      id="contact-form"
+    >
+      <input type="hidden" name="_captcha" value="false" />
+      <input
+        type="text"
+        name="name"
+        placeholder="Ditt namn"
+        aria-label="Ditt namn"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Din e-post"
+        aria-label="Din e-post"
+        required
+      />
+      <textarea
+        name="message"
+        placeholder="Ditt meddelande"
+        aria-label="Ditt meddelande"
+        required></textarea>
+      <button aria-label="Send message" type="submit">Skicka</button>
+    </form>
+
+    <p id="thankyou" style="display:none; margin-top:1em; color:#d82094;">
+      Tack för ditt meddelande, jag återkommer så snart jag kan!
+    </p>
+  </section>
+
+  <SectionDivider
+    src="/roses-divider.webp"
+    position="center 35%"
+    opacity={0.8}
+    height="260px"
+  />
+
+  <section class="inner-power-section">
+    <h2 class="contact-heading">Din inre kraft</h2>
+    <p>
+      Välkommen till en varm gemenskap med energiövningar, inspiration och små
+      påminnelser om att möta dig själv med mer omtanke, närvaro och tillit.
+    </p>
+    <p>
+      Medlemsportalen Din Inre Kraft är min kostnadsfria Facebookgrupp där jag
+      delar inspiration, energiövningar och reflektioner för dig som vill skapa
+      mer balans, närvaro och kontakt med dig själv i vardagen.
+    </p>
+    <p>
+      I gruppen hittar du enkla övningar, inspiration och reflektioner kring
+      Change Work, våra känslor, upplevelser, mönster och inre utveckling. Här
+      har du också möjlighet att ställa frågor om du vill. Ibland har vi även
+      kortdragningar med orakelkort som en hjälp till reflektion, fördjupning
+      och inspiration.
+    </p>
+    <p>
+      Det är en trygg plats där du får fylla på, landa i dig själv och påminnas
+      om den kraft, visdom och möjlighet till förändring som redan finns inom
+      dig.
+    </p>
+    <p class="cursive-text">Varmt välkommen!</p>
+    <a
+      class="pill-button"
+      href="https://www.facebook.com/groups/2725402944445316/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Bli medlem i Din Inre Kraft
+    </a>
+  </section>
+
+  <SignUpSection bgImage="/roses-contactpage.jpg" />
+
+  <script type="module">
+    const form = document.getElementById("contact-form");
+    const heading = document.getElementById("heading");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = new URLSearchParams(new FormData(form));
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data.toString(),
+        });
+
+        if (response.ok) {
+          form.style.display = "none";
+          heading.style.display = "none";
+          document.getElementById("thankyou").style.display = "block";
+        } else {
+          alert("Något gick fel, försök igen!");
+        }
+      } catch (err) {
+        alert("Något gick fel, försök igen!");
+      }
+    });
+  </script>
+
+  <style>
+    .contact-section,
+    .inner-power-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding-inline: 1.5rem;
+    }
+
+    .contact-section {
+      padding-top: 80px;
+    }
+
+    .inner-power-section {
+      max-width: 700px;
+      margin-bottom: 80px;
+      align-items: flex-start;
+    }
+
+    .contact-intro {
+      width: 100%;
+      max-width: 650px;
+      margin-bottom: 30px;
+    }
+
+    .contact-heading {
+      align-self: center;
+      font-size: 1.3rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #cfa734;
+      text-align: center;
+      margin: 0 0 30px 0;
+    }
+
+    .contact-intro p,
+    .inner-power-section p {
+      margin: 0 0 1em 0;
+      line-height: 1.5;
+    }
+
+    .cursive-text {
+      font-style: italic;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 650px;
+      color: #5a5656;
+      border: none;
+    }
+
+    input {
+      height: 50px;
+      background-color: white;
+      color: #5a5656;
+      border: none;
+      padding: 16px;
+    }
+
+    textarea {
+      height: 150px;
+      background-color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 1%;
+      color: #5a5656;
+    }
+
+    button,
+    .pill-button {
+      display: block;
+      padding: 20px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      background-color: #ff3b9c;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    button {
+      width: 150px;
+      margin-left: auto;
+    }
+
+    .pill-button {
+      margin-top: 1em;
+      padding-inline: 30px;
+      text-decoration: none;
+      text-align: center;
+    }
+  </style>
+</BaseLayout>
