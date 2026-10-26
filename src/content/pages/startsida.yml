@@ -4,29 +4,48 @@ hero:
 coaching:
   heading: Transformativ Coaching
   subheading: Integrative Change Work, Hypnos, NLP, Mindful Tapping, Energimedicin, Healing
-  text: |-
-    När du upplever att du sitter fast och vill bli fri från det som hindrar dig.
+  text: >-
+    När du upplever att du sitter fast och vill bli fri från det som hindrar
+    dig.
+
 
     Här blir du mjukt guidad till kontakt med ditt undermedvetna där du kan transformera det som längtar efter förändring.
 
+
     Många upplever att dessa sessioner ger djupgående förändring utan att behöva gräva djupt i det tunga, att processen kan kännas förvånansvärt lättsam och enkel.
-  closing: Du behöver inte bli någon som du inte är, det här är en inbjudan till att få komma hem till dig själv.
+  closing: Du behöver inte bli någon som du inte är, det här är en inbjudan till
+    att få komma hem till dig själv.
   buttonText: Boka session
   image: /src/assets/media/helenaProfil3.png
-  imageAlt: Helena Swane i en klarrosa kavaj och ett stort leende
+  imageAlt: Helena Swane i en blommig jacka och stort leende
 testimonials:
   heading: Testimonials
   subheading: Ord från några av de klienter jag haft glädjen att arbeta med
   image: /src/assets/media/rainbowbutterfly.webp
   imageAlt: Rund och färgglad bild av en gyllene fjäril mot en suddig bakgrund
   items:
-    - quote: Wow, vilken härlig session. Helena har en fantastisk förmåga att guida på ett så kärleksfullt, varmt och tryggt sätt. Vi jobbade med ett mönster jag kämpat med under en längre tid och på ett lekfullt och roligt sätt har Helena hjälpt mig att skifta det. Oro har bytts ut mot lugn, pepp och glädje. Alla som vill bli coachade med ledord som trygghet, lekfullhet och kärlek borde testa en session med Helena! Tusen tack! ❤
+    - quote: Wow, vilken härlig session. Helena har en fantastisk förmåga att guida på
+        ett så kärleksfullt, varmt och tryggt sätt. Vi jobbade med ett mönster
+        jag kämpat med under en längre tid och på ett lekfullt och roligt sätt
+        har Helena hjälpt mig att skifta det. Oro har bytts ut mot lugn, pepp
+        och glädje. Alla som vill bli coachade med ledord som trygghet,
+        lekfullhet och kärlek borde testa en session med Helena! Tusen tack! ❤
       name: Helena
-    - quote: Coachingen med Helena gav resultat direkt. Mitt motstånd mot att ta tag i saker har minskat markant och förändringen sitter fortfarande i en månad senare. Helena är en varm och intuitiv coach som jag verkligen rekommenderar.
+    - quote: Coachingen med Helena gav resultat direkt. Mitt motstånd mot att ta tag i
+        saker har minskat markant och förändringen sitter fortfarande i en månad
+        senare. Helena är en varm och intuitiv coach som jag verkligen
+        rekommenderar.
       name: Johanna
-    - quote: Det var fantastiskt att kunna arbeta med något så djupt och svårt utan att det kändes tungt eller överväldigande. Helena är trygg, lugn och professionell och jag rekommenderar henne verkligen som coach.
+    - quote: Det var fantastiskt att kunna arbeta med något så djupt och svårt utan
+        att det kändes tungt eller överväldigande. Helena är trygg, lugn och
+        professionell och jag rekommenderar henne verkligen som coach.
       name: Linda
-    - quote: Vill verkligen rekommendera Helenas sessioner. Jag hade känslor och tankar som drog ner mig rejält. Men med Helenas vägledning har jag hittat ut från både känslan och de mörka tankarna. Det var nästan som magi, att på en timma förändra något som dragit ner mig så länge. Och det bästa av allt är att det håller i sig..
+    - quote: Vill verkligen rekommendera Helenas sessioner. Jag hade känslor och
+        tankar som drog ner mig rejält. Men med Helenas vägledning har jag
+        hittat ut från både känslan och de mörka tankarna. Det var nästan som
+        magi, att på en timma förändra något som dragit ner mig så länge. Och
+        det bästa av allt är att det håller i sig..
       name: Eva
-    - quote: Jag upplevde sessionen som en varm sommarvind. Mjuk, behaglig och fylld av tillit.
+    - quote: Jag upplevde sessionen som en varm sommarvind. Mjuk, behaglig och fylld
+        av tillit.
       name: Veronica
